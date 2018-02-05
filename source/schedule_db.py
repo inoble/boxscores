@@ -2,6 +2,7 @@ import os, operator
 import dbf
 
 def schedule_db():
+	""" Creates a list of entire season's game schedule """
 
 	# location of NBA Live 06 saved games
 	target_dir = r'C:\Users\Ian\Documents\NBA Live 06\saves'
@@ -59,5 +60,8 @@ def schedule_db():
 	schedule_db_sorted = sorted(schedule_db, key=operator.itemgetter(6, 0), reverse=True)
 		
 	return schedule_db_sorted
-	
-schedule_db()
+
+
+if __name__ == "__main__":
+
+	schedule_db()
