@@ -2,7 +2,6 @@ import os, pyperclip, time
 import find_files, write_boxscores
 from ftplib import FTP
 
-
 # snapshot of the directory before files are created
 start = find_files.find_files()
 
@@ -47,12 +46,10 @@ def copy_bbcode_to_clipboard():
 	print ('bbcode copied and ready to paste')
 	
 	time.sleep(2)
-	
 
-def main():	
+
+if __name__ == "__main__":
 
 	upload_boxscores()
 	
 	copy_bbcode_to_clipboard()
-
-main()
