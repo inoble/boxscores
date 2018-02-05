@@ -80,8 +80,6 @@ def snapshot_db(db_id):
 	# order the database of players by player_id
 	snapshot_db_sorted = sorted(snapshot_db, key=operator.itemgetter(18))
 	
-	print (snapshot_db_sorted)
-	
 	return snapshot_db_sorted
 
 
