@@ -80,9 +80,15 @@ def snapshot_db(db_id):
 	# order the database of players by player_id
 	snapshot_db_sorted = sorted(snapshot_db, key=operator.itemgetter(18))
 	
+	print (snapshot_db_sorted)
+	
 	return snapshot_db_sorted
 
 
 if __name__ == "__main__":
 
-	snapshot_db(db_id)
+	print ('Which date should be posted?')
+	print ('0 = most recent, 1 = next most recent')
+	answer = int(input('> '))
+
+	snapshot_db(answer)
