@@ -1,6 +1,7 @@
 import os, operator
 
 def find_files():
+	""" Creates and returns a list of all filenames within a directory """
 
 	# location of all previously created html files
 	target_dir = r'C:\Users\Ian\OneDrive\Ian\Documents\Dynasty Five\Results\1718'
@@ -16,8 +17,11 @@ def find_files():
 								])
 	
 	# sort files by filename to find most recently edited	
-	starting_files = sorted(files, key=operator.itemgetter(0), reverse=True)
+	found_files = sorted(files, key=operator.itemgetter(0), reverse=True)
 	
-	return starting_files
+	return found_files
 	
-find_files()
+
+if __name__ == "__main__":
+
+	find_files()
