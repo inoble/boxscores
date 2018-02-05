@@ -1,5 +1,5 @@
 import datetime
-import get_stats, get_filename, find_games, teamdata
+import get_stats, get_filename, find_games, get_in_game_date, teamdata
 
 def write_boxscores():
 
@@ -27,25 +27,9 @@ def write_boxscores():
 		# each game is assigned a separate filename for upload to webserver
 		filename = get_filename.get_filename()
 		
-		# configure dates for presentation
-		# real life date on which the games are simulated
+		# get dates on which the games are simulated
 		irl_date = str(datetime.date.today())
-		
-		def generate_in_game_date():
-		
-			in_game_month = int((str(games[x][0])[5:-1])[:-2])
-			
-			if in_game_month < 9:
-				in_game_year = str(irl_date)[:-6]
-			elif in_game_month > 9:
-				in_game_year = int(str(irl_date)[:-6])-1
-			
-			game_date = str(str(in_game_year) + '-' + ((str(games[x][0])[5:-1])[:-2]) + '-' + ((str(games[x][0])[5:-1])[2:]))
-			
-			return game_date
-
-		# in-game date on which the games are simulated
-		in_game_date = generate_in_game_date()			
+		in_game_date = get_in_game_date.get_in_game_date(x, irl_date)			
 			
 		# check if game went to overtime
 		def check_if_overtime():
