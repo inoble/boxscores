@@ -1,14 +1,12 @@
 import datetime
-import get_stats, get_filename, find_games, get_in_game_date, teamdata
+import get_stats, get_filename, find_games, get_in_game_date, check_if_overtime, teamdata
 
 def write_boxscores():
+	""" Writes presentable html boxscores into separate html files, as well as presentable bbcode linking to each game's uploaded boxscore """
 
 	# import player statistics and today's games information
 	stats = get_stats.get_stats()
 	games = find_games.find_games()
-	
-	number_of_players = len(stats)
-	number_of_games = len(games)
 	
 	# import teamdata for use in html presentation
 	colours = teamdata.colours()
@@ -22,30 +20,14 @@ def write_boxscores():
 	# bbcode will be written to this file to be posted to the forum
 	bbcode = open( r'C:\Users\Ian\Desktop\boxscores.txt', 'w' )
 	
-	for x in range(number_of_games):
+	for x in range(len(games)):
 	
-		# each game is assigned a separate filename for upload to webserver
 		filename = get_filename.get_filename()
-		
-		# get dates on which the games are simulated
 		irl_date = str(datetime.date.today())
-		in_game_date = get_in_game_date.get_in_game_date(x, irl_date)			
-			
-		# check if game went to overtime
-		def check_if_overtime():
+		in_game_date = get_in_game_date.get_in_game_date(x, irl_date)
+		overtime = check_if_overtime.check_if_overtime(x)
 		
-			is_overtime = str(games[x][6])
-		
-			if is_overtime == "[True]":
-				overtime = 'OT'
-			else:
-				overtime = ''
-				
-			return overtime
-		
-		overtime = check_if_overtime()
-		
-		# assign home and away team variables
+		# assign home and away team variables to be written into the header
 		game_time = str(games[x][1])[1:-1]
 		home_team = int(str(games[x][2])[1:-1])
 		away_team = int(str(games[x][3])[1:-1])
@@ -138,7 +120,7 @@ def write_boxscores():
 			boxscore.write ('</tr>')
 			
 			# check through each player in the database
-			for y in range(number_of_players):
+			for y in range(len(stats)):
 
 				# assign player statistics variables
 				first_name = str(stats[y][1])
