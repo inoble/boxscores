@@ -25,15 +25,14 @@ def write_boxscores():
 		filename = get_filename.get_filename()
 		irl_date = str(datetime.date.today())
 		in_game_date = get_in_game_date.get_in_game_date(x, irl_date)
+		game_time = str(games[x][1])[1:-1]
 		overtime = check_if_overtime.check_if_overtime(x)
 		
 		# assign home and away team variables to be written into the header
-		game_time = str(games[x][1])[1:-1]
 		home_team = int(str(games[x][2])[1:-1])
 		away_team = int(str(games[x][3])[1:-1])
 		home_score = str(games[x][4])[1:-1]
 		away_score = str(games[x][5])[1:-1]
-		
 		home_team_string = teamnames[home_team]
 		away_team_string = teamnames[away_team]
 		home_gm_name = str(gm_names[home_team])
@@ -43,7 +42,7 @@ def write_boxscores():
 		home_gm_awards = str(gm_awards[home_team])
 		away_gm_awards = str(gm_awards[away_team])
 
-		# write bbcode to be posted on the forum
+		# write bbcode to be posted on the forum that will link to each game's boxscore
 		bbcode.write (
 			'[a href="http://www.iannoble.org.uk/d5/scores/1718/bx' + filename + '"]' + '[img]http://iannoble.org.uk/d5/box.gif[/img][/a] ' + teamnames[away_team] + ' @ ' + teamnames[home_team] + '\n'
 					)			
@@ -51,7 +50,7 @@ def write_boxscores():
 		# html code will be written to this file and uploaded to the webserver
 		boxscore = open( r'C:\Users\Ian\OneDrive\Ian\Documents\Dynasty Five\Results\1718\bx' + filename, 'w' )
 		
-		# write html file
+		# write html file header
 		boxscore.write (
 		
 			# write html title, assign favicon and css
@@ -96,28 +95,30 @@ def write_boxscores():
 			'</tr></table>'
 		
 						)
+		# end of html header
 		
 		# statistics totals
 		fgat, fgmt, tpat, tpmt, ftat, ftmt, tovt, blkt, stlt, rebt, astt, ptst, fgata, fgmta, tpata, tpmta, ftata, ftmta, tovta, blkta, stlta, rebta, astta, ptsta = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
 		teams_playing = [ away_team, home_team ]
 		
-		# for loop for each team playing
+		# for each of the two teams playing
 		for z in range(2):
 		
 			team_to_write = teams_playing[z]
 			
-			# declare list of statistics column headers in preparation for writing as a for loop
+
+			# write each statistics column header
 			boxscore_header_cells = [ 'Min', 'FG', '3PT', 'FT', 'PF', 'TO', 'Blk', 'Stl', 'Reb', 'Ast', 'Pts' ]
 			
 			boxscore.write ('<table width="800px"><tr><td></td><td></td>')
 			
-			# write each statistics column header
 			for item in range(len(boxscore_header_cells)):
 				
 				boxscore.write ( '<td><b><font size=2 color="' + str(colours[team_to_write]) + '"><center>' + boxscore_header_cells[item] + '</center></font></b></td>' )
 								
 			boxscore.write ('</tr>')
+			
 			
 			# check through each player in the database
 			for y in range(len(stats)):
@@ -146,24 +147,25 @@ def write_boxscores():
 				tp = (tpm + '/' + tpa)
 				ft = (ftm + '/' + fta)
 				
+				
 				# write player statistics if team is found
 				if team_to_write == stats[y][0]:
+				
 					
 					# write each player's name in first column
 					boxscore.write ( '<tr>'
 							'<td width=150><font size=2 color=' + str(colours[team_to_write]) + '>' + full_name + '</font></td>'
 							'<td></td>' )
 					
-					# declare list of statistics in preparation for writing as a for loop
+					# write each player's statistics for each player found
 					player_stats_cells = [ mins, fg, tp, ft, fouls, tov, blk, stl, reb, ast, pts ]
 					
-					# write each player's statistics for each player found
 					for item in range(len(player_stats_cells)):
 						
 						boxscore.write ( '<td width=50><center><font size=2 color=ffffff>' + player_stats_cells[item] + '</font></center></td>' )
-					
-					# close row
+						
 					boxscore.write ( '</tr>' )
+					
 					
 					# calculate team totals whilst writing each player's statistics
 					fgata = fgata + int(fga)
@@ -189,13 +191,13 @@ def write_boxscores():
 					asttsa = str(astta)
 					ptstsa = str(ptsta)
 					
+					
 			# write team statistical totals as a for loop
 			boxscore.write ( '<tr><td width=150><font size=2 color="' + str(colours[team_to_write]) + '"><b>Totals</b></font></td></td>' )
 			
-			# declare list of statistics totals in preparation for writing as a for loop
+			# write team's statistics totals
 			team_total_strings = [ '', '', fgata_str, tpata_str, ftata_str, '', tovtsa, blktsa, stltsa, rebtsa, asttsa, ptstsa  ]
 			
-			# write team's statistics totals
 			for item in range(len(team_total_strings)):
 			
 				boxscore.write ( '<td width=50><font size=2 color="' + str(colours[team_to_write]) + '"><b><center>' + team_total_strings[item] + '</center></b></font></td>' )
