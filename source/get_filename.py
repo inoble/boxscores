@@ -1,6 +1,8 @@
 import os, operator
 
 def get_filename():
+	""" Generates the next html filename to be created """
+
 	target_dir = r'C:\Users\Ian\OneDrive\Ian\Documents\Dynasty Five\Results\1718'
 
 	files = []
@@ -49,4 +51,7 @@ def get_filename():
 		
 	return next_file_name
 	
-get_filename()
+
+if __name__ == "__main__":
+
+	get_filename()
