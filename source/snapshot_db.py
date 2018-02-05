@@ -48,30 +48,32 @@ def snapshot_db(db_id):
 			for item in matches:
 				
 				snapshot_db.append([
-										item[45],							# Team [0]
-										item[2],							# First Name [1]
-										item[1],							# Surname [2]
-										item[46],							# Roster Position [3]
-										
-										item[122],							# Minutes [4]
-										item[121],							# Turnovers [5]
-										item[115],							# Blocks [6]
-										item[119],							# Steals [7]
-										format(item[116] + item[120]),		# Rebounds [8]
-										item[117],							# Assists [9]
-										format(((item[110]-item[112])*2) + (item[112]*3) + (item[114])),
-																			# Points [10]
-										item[110],							# Field Goals [11]
-										item[109],							# Field Goals Attempted [12]
-										item[112],							# 3PT [13]
-										item[111],							# 3PT Attempted [14]
-										item[114],							# Free Throws [15]
-										item[113],							# Free Throws Attempted [16]
-										
-										item[123],							# Games Played [17]
-										item[4],							# Player ID [18]
-										item[118],							# Personal Fouls [19]
-										])
+				
+					item[45],							# Team [0]
+					item[2],							# First Name [1]
+					item[1],							# Surname [2]
+					item[46],							# Roster Position [3]
+					
+					item[122],							# Minutes [4]
+					item[121],							# Turnovers [5]
+					item[115],							# Blocks [6]
+					item[119],							# Steals [7]
+					format(item[116] + item[120]),		# Rebounds [8]
+					item[117],							# Assists [9]
+					format(((item[110]-item[112])*2) + (item[112]*3) + (item[114])),
+														# Points [10]
+					item[110],							# Field Goals [11]
+					item[109],							# Field Goals Attempted [12]
+					item[112],							# 3PT [13]
+					item[111],							# 3PT Attempted [14]
+					item[114],							# Free Throws [15]
+					item[113],							# Free Throws Attempted [16]
+					
+					item[123],							# Games Played [17]
+					item[4],							# Player ID [18]
+					item[118],							# Personal Fouls [19]
+					
+								])
 				
 			team = team + 1
 
