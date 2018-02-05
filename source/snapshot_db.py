@@ -1,7 +1,7 @@
 import dbf, operator, os
 
 def snapshot_db(db_id):
-	""" Creates a snapshot of a database """
+	""" Creates a snapshot of a database's player statistics """
 
 	# location of NBA Live 06 saved games
 	target_dir = r'C:\Users\Ian\Documents\NBA Live 06\saves'
