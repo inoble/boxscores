@@ -1,11 +1,11 @@
 import schedule_db, find_sims_date
 
 def find_games():
+	""" Creates and returns a list of all today's games with a database """
 
-	# list to contain all games on today's in-game date
 	found_games = []
 
-	# get list of league schedule
+	# retrieve list of league's games schedule
 	schedule = schedule_db.schedule_db()
 	
 	# find today's in-game date
@@ -33,7 +33,10 @@ def find_games():
 								
 		y = y + 1
 	
-	# return list of today's games information
+	# return list of today's games
 	return found_games
-		
-find_games()
+
+
+if __name__ == "__main__":
+
+	find_games()
