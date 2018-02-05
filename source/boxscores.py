@@ -15,6 +15,7 @@ end = find_files.find_files()
 created_boxscores = [x for x in end if x not in start]
 
 def upload_boxscores(ftp = FTP('server.name'), ftp_user='username', ftp_passwd='password', upload_directory = 'server\\directory\\location'):
+	""" Uploads every newly created html file """
 
 	# declare ftp settings
 	ftp.login(user=ftp_user, passwd=ftp_passwd)
@@ -36,6 +37,7 @@ def upload_boxscores(ftp = FTP('server.name'), ftp_user='username', ftp_passwd='
 
 
 def copy_bbcode_to_clipboard():		
+	""" Copies presentable bbcode game-links to the clipboard for pasting into online forum """
 	
 	# file to copy
 	bbcode = open(r'C:\Users\Ian\Desktop\boxscores.txt', 'r').read()
